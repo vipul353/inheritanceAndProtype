@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Inheritace and prototype</title>
+  </head>
+  <body>
+    <div class="heading">
+      <div class="text">Inheritace and prototype</div>
+    </div>
+    <hr />
+    <h3>
+      Q1. Create 2 objects - parent and child. Attach methods to parent and use
+      those methods in child object using parents prototype.
+    </h3>
+    <h4>Ans:-</h4>
+    <pre>
+        let parent = {
+            name: "vipul",
+            LastName: "thakur",
+            details: function () {
+                console.log(`my full name is ${this.name} ${this.LastName}`);
+            }
+        };
+        
+        let child = {
+            name: "vivek"
+        };
+        
+        child.__proto__ = parent;
+        child.details();        
+    </pre>
+    <h4>Output:-1,0</h4>
+    <h4>explanation:-</h4>
+    <p>
+      The code creates two objects, `parent` and `child`, and establishes a
+      prototype relationship between them using `__proto__`. When
+      `child.details()` is called, it executes the `details` function from the
+      `parent` object and prints "my full name is vipul thakur". The `child`
+      object inherits the `details` method from `parent` through prototypal
+      inheritance.
+    </p>
+    <hr />
+    <h3>Q2. Write code to explain prototype chaining.</h3>
+    <h4>Ans:-</h4>
+    <pre>
+        let grandparent = { age: 70 };
+        let parent = { name: "John" };
+        let child = {};
+        
+        child.__proto__ = parent;
+        parent.__proto__ = grandparent;
+        
+        console.log(child.name); // Output: "John"
+        console.log(child.age); // Output: 70
+               
+      </pre
+    >
+    <h4>Output:jhon</h4>
+    <h4>explanation:-70</h4>
+    <p>
+      In this code, child is assigned parent as its prototype, and parent is
+      assigned grandparent as its prototype. As a result, child inherits
+      properties from both parent and grandparent. Accessing child.name
+      retrieves the value "John" inherited from parent, and accessing child.age
+      retrieves the value 70 inherited from grandparent
+    </p>
+    <hr />
+    <h3>Q3.Add a method to calculate sum of all elements in Array in array's protype, use that method to calculate sum for multiple arrays.</h3>
+    <h4>Ans:-</h4>
+    <pre>
+    Array.prototype.calculateSum = function() {
+        return this.reduce((acc, curr) => acc + curr, 0);
+      };
+      
+    
+      let array1 = [1, 2, 3, 4, 5];
+      let array2 = [10, 20, 30, 40, 50];
+      let array3 = [2, 4, 6, 8, 10];
+      
+    
+      let sum1 = array1.calculateSum();
+      let sum2 = array2.calculateSum();
+      let sum3 = array3.calculateSum();
+           
+  </pre
+    >
+    <h4>Output:15 150 30</h4>
+    <h4>explanation:-</h4>
+    <p>
+      In this code, the calculateSum method is added to the Array prototype
+      using Array.prototype.calculateSum. This method uses the reduce function
+      to iterate over the array and calculate the sum of all elements. We then
+      create three arrays, array1, array2, and array3, and calculate the sum for
+      each array using the calculateSum method. Finally, we print the calculated
+      sums to the console.
+    </p>
+    <hr />
+    <h3>Q4. Write a JavaScript function to retrieve all the names of object's own and inherited properties.</h3>
+    <h4>Ans:-</h4>
+    <pre>
+        function getAllPropertyNames(obj) {
+            let propertyNames = [];
+            let currentObj = obj;
+          
+            while (currentObj !== null) {
+              propertyNames = propertyNames.concat(Object.getOwnPropertyNames(currentObj));
+              currentObj = Object.getPrototypeOf(currentObj);
+            }
+          
+            return propertyNames;
+          }
+          
+
+          let parent = {name: "John"};
+let child = Object.create(parent);
+child.age = 25;
+
+let propertyNames = getAllPropertyNames(child);
+console.log(propertyNames); 
+
+        
+  </pre
+    >
+    <h4>Output:Output: ["age", "name"]</h4>
+    <h4>explanation:-</h4>
+    <p>
+      In this example, the child object inherits the name property from its
+      parent object. The getAllPropertyNames function collects both own and
+      inherited property names and returns ["age", "name"]
+    </p>
+    <script src="./smaple.js"></script>
+  </body>
+</html>
